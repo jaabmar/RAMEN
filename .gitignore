@@ -1,0 +1,12 @@
+wandb/
+legacy/
+__pycache__/
+data/
+slurm*
+nohup.out
+.DS_Store
+results/**
+cattaneo**
+**ipynb
+***.sh
+.vscode/settings.json
