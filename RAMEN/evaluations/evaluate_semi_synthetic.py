@@ -11,7 +11,7 @@ from RAMEN.models.ramen import Ramen
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Semi-synthetic Experiments")
     parser.add_argument("--n_env", type=int, default=5, help="Number of environments")
-    parser.add_argument("--n_features", type=int, default=6, help="Number of features")
+    parser.add_argument("--n_features", type=int, default=2, help="Number of pre-treatment features")
     parser.add_argument("--invariance", type=str, default='Y')
     parser.add_argument("--post_treatment", type=str, default='collider')
     parser.add_argument("--n_post", type=int, default=1, help="Number of post-treatment features")

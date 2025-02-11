@@ -12,7 +12,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description="Synthetic Experiments")
     parser.add_argument("--n_env", type=int, default=5, help="Number of environments")
     parser.add_argument("--n", type=int, default=1000, help="Number of samples for each environment")
-    parser.add_argument("--n_features", type=int, default=2, help="Dimension of X")
+    parser.add_argument("--n_features", type=int, default=2, help="Number of pre-treatment features")
     parser.add_argument("--invariance", type=str, default='Y')
     parser.add_argument("--post_treatment", type=str, default='collider')
     parser.add_argument("--n_post", type=int, default=1, help="Number of post-treatment features")
