@@ -37,7 +37,7 @@ def main():
     logger.info("Evaluating naive baselines...")
     error_all, error_null = evaluate_naive_baselines(data, use_xgboost=True)
     logger.info("Naive Baselines - MAE (all): %.3f, MAE (null): %.3f", error_all, error_null)
-    
+
     logger.info("Initializing Ramen model...")
     ramen = Ramen(obs_features, args.n_env, use_xgboost=True, logger=logger)
     logger.info("Computing Ramen subset...")

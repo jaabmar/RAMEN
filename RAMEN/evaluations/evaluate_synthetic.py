@@ -1,7 +1,4 @@
 import argparse
-import logging
-import os
-import sys
 
 from RAMEN.data.data import sample_synthetic
 from RAMEN.evaluations.evaluations_utils import (evaluate_irm,
@@ -57,9 +54,11 @@ def main():
     error_irm = evaluate_irm(data)
     logger.info("IRM Model - MAE: %.3f", error_irm)
 
-    logger.info("Final MAE Results - Null: %.3f, All: %.3f, Ramen: %.3f, Instant Ramen: %.3f, IRM: %.3f", 
-                error_null, error_all, error_ramen, error_instant_ramen, error_irm)
+    logger.info(
+        "MAE (null): %.3f, MAE (all): %.3f, MAE (Ramen): %.3f, MAE (Instant Ramen): %.3f, MAE (IRM): %.3f",
+        error_null, error_all, error_ramen, error_instant_ramen, error_irm
+    )
+
 
 if __name__ == "__main__":
     main()
-
