@@ -3,10 +3,12 @@ import logging
 import os
 import sys
 
-from data import sample_semisynthetic
-from models.ramen import Ramen
-from utils import (evaluate_irm, evaluate_naive_baselines, evaluate_subset,
-                   pool_data, tune_instant_ramen)
+from RAMEN.data.data import sample_semisynthetic
+from RAMEN.evaluations.evaluations_utils import (evaluate_irm,
+                                                 evaluate_naive_baselines,
+                                                 evaluate_subset, pool_data,
+                                                 tune_instant_ramen)
+from RAMEN.models.ramen import Ramen
 
 
 def parse_arguments():

@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="RAMEN",
-    version="0.1",
+    version="0.1.0",
     author="Javier Abad & Piersilvio de Bartolomeis",
     author_email="javier.abadmartinez@ai.ethz.ch",
     description="Python implementation of the methods introduced in the paper: Doubly robust identification of treatment effects from multiple environments",
@@ -18,7 +18,7 @@ setup(
         "Operating System :: OS Independent",
     ],
     keywords="machine learning, causal inference, identifiability, observational studies, treatment effect, double robustness",
-    packages=find_packages(),
+    packages=find_packages(where="."),
     install_requires=[
         "numpy",
         "pandas",
@@ -28,5 +28,5 @@ setup(
         "scipy",
         "tqdm",
     ],
-    python_requires=">=3.12",
+    python_requires=">=3.10",
 )

@@ -4,9 +4,9 @@ import torch.nn as nn
 import torch.optim as optim
 from tqdm import tqdm
 
-from models.models_utils import (compute_cross_statistic,
-                                 construct_cross_kernel_matrix)
-from models.ramen import Ramen
+from RAMEN.models.models_utils import (compute_cross_statistic,
+                                       construct_cross_kernel_matrix)
+from RAMEN.models.ramen import Ramen
 
 
 class GumbelGate(nn.Module):

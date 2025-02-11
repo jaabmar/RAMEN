@@ -8,8 +8,8 @@ import torch
 from sklearn.linear_model import LinearRegression, LogisticRegression
 from xgboost import XGBClassifier, XGBRegressor
 
-from models.models_utils import (XGB_PARAMS, compute_cross_statistic,
-                                 construct_cross_kernel_matrix)
+from RAMEN.models.models_utils import (XGB_PARAMS, compute_cross_statistic,
+                                       construct_cross_kernel_matrix)
 
 
 def generate_subsets(data):

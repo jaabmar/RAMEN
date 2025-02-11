@@ -6,8 +6,8 @@ import torch
 from sklearn.linear_model import LinearRegression, LogisticRegression
 from xgboost import XGBClassifier, XGBRegressor
 
-from models.instant_ramen import InstantRamen
-from models.IRM import IRM
+from RAMEN.models.instant_ramen import InstantRamen
+from RAMEN.models.IRM import IRM
 
 # Constants
 EPSILON = 0.025
