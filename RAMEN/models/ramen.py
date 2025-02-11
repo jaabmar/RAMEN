@@ -17,11 +17,12 @@ def generate_subsets(data):
 
 
 class Ramen:
-    def __init__(self, input_dim: int, n_env: int, use_xgboost=False, logger=None):
+    def __init__(self, input_dim: int, n_env: int, use_xgboost=False, logger=None, max_workers=1):
         self.input_dim = input_dim
         self.n_env = n_env
         self.use_xgboost = use_xgboost
         self.logger = logger
+        self.max_workers = max_workers
 
     def compute_stat(self, x, psi):
         K = construct_cross_kernel_matrix(x)
@@ -33,8 +34,7 @@ class Ramen:
 
         subsets = list(generate_subsets(range(self.input_dim)))
         partial_loss = partial(self.compute_loss, X=X, Y=Y, T=T)
-
-        with concurrent.futures.ProcessPoolExecutor(max_workers=1) as executor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=self.max_workers) as executor:
             results = list(executor.map(partial_loss, subsets))
 
         # Sort results by loss value
@@ -55,9 +55,7 @@ class Ramen:
     def compute_loss(self, subset, X, Y, T):
         X_pool = X.reshape(-1, X.shape[2])[:, subset]
         T_pool, Y_pool = T.reshape(-1), Y.reshape(-1)
-
         model_t, model_y1, model_y0 = self.initialize_models()
-
         model_t.fit(X_pool, T_pool)
         model_y1.fit(X_pool[T_pool == 1], Y_pool[T_pool == 1])
         model_y0.fit(X_pool[T_pool == 0], Y_pool[T_pool == 0])
