@@ -12,19 +12,27 @@
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [Contact](#contact)
-<!-- - [Citation](#citation) -->
+- [Citation](#citation)
 
----
 
 ## Overview
 
-![HAIPW Diagram](diagram.jpg)
+This repository contains the Python implementation of **Robust ATE identification from Multiple ENvironments (RAMEN)**, introduced in the paper *"Doubly Robust Identification of Treatment Effects from Multiple Environments"*.
 
-This repository contains the Python implementation of **Robust ATE identification from Multiple ENvironments (RAMEN)**, as introduced in the paper *"Doubly robust identification of treatment effects from multiple environments"*.
+RAMEN addresses treatment effect identification by leveraging the heterogeneity of multiple data sources without requiring complete knowledge of the causal graph. It achieves *doubly robust identification*, meaning the treatment effect can be identified if either the causal parents of the treatment or those of the outcome are observed.
+
+### **Key Contributions:**
+
+- **Doubly Robust Identification:** We introduce a novel double robustness property targeting identification rather than estimation, providing guarantees even with post-treatment and unobserved variables.
+
+- **Algorithms:**
+  1. **RAMEN:** Uses a combinatorial search over subsets of covariates.
+  2. **Insta-RAMEN:** A scalable optimization procedure leveraging the Gumbel trick.
+
+- **Empirical Validation:** Our algorithms outperform existing methods on synthetic and semi-synthetic datasets and show strong results on real-world data, aligning with epidemiological findings.
 
 <!-- For more details, see our [research paper](https://arxiv.org/abs/2502.04262). -->
 
----
 
 ## Contents
 
@@ -48,7 +56,6 @@ RAMEN/
 │   ├── models_utils.py                # Model utility functions
 ```
 
----
 
 ## Getting Started
 
@@ -85,7 +92,6 @@ pip install --upgrade pip
 pip install -e .
 ```
 
----
 
 ## Usage
 
@@ -101,14 +107,13 @@ python evaluate_synthetic.py --n_env 5 --n 1000 --n_features 2 --invariance Y --
 
 - `--n_env`: Number of environments
 - `--n`: Number of samples for each environment
-- `--n_features`: Dimension of pre-treatment features
+- `--n_features`: Number of pre-treatment features
 - `--invariance`: Invariance setting (`Y`, `T`, `TY`)
 - `--post_treatment`: Type of post-treatment features (`collider`, `descendant`, `noise`)
 - `--n_post`: Number of post-treatment features
 - `--ate`: Average treatment effect
 - `--seed`: Random seed for reproducibility
 
----
 
 ## Contributing
 
@@ -120,7 +125,6 @@ We welcome contributions to improve this project. Here's how you can contribute:
 4. Push to your branch (`git push origin feature-branch`)
 5. Open a Pull Request
 
----
 
 ## Contact
 
@@ -130,7 +134,6 @@ For questions or collaborations, feel free to reach out:
 - Piersilvio de Bartolomeis - [piersilvio.debartolomeis@inf.ethz.ch](mailto:piersilvio.debartolomeis@inf.ethz.ch)
 - Julia Kostin - [jkostin@ethz.ch](jkostin@ethz.ch)
 
----
 
 ## Citation
 
