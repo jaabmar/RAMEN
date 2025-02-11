@@ -1,6 +1,8 @@
 
 import itertools
-
+import logging
+import os
+import sys
 import numpy as np
 import torch
 from sklearn.linear_model import LinearRegression, LogisticRegression
@@ -29,6 +31,30 @@ PARAM_COMBINATIONS = list(itertools.product(
     PARAM_GRID['init_temp'],
     PARAM_GRID['anneal_rate']
 ))
+
+
+def setup_logger(log_name, post_treatment, invariance, seed):
+    root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    logs_dir = os.path.join(root_dir, "logs")
+    os.makedirs(logs_dir, exist_ok=True)
+    log_filename = os.path.join(logs_dir, f"{log_name}_{post_treatment}_{invariance}_seed{seed}.log")
+
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
+    if logger.hasHandlers():
+        logger.handlers.clear()
+    file_handler = logging.FileHandler(log_filename, delay=False)
+    file_formatter = logging.Formatter('%(asctime)s - %(message)s')
+    file_handler.setFormatter(file_formatter)
+    class FlushStreamHandler(logging.StreamHandler):
+        def emit(self, record):
+            super().emit(record)
+            self.flush()
+    stream_handler = FlushStreamHandler(sys.stdout)
+    stream_handler.setFormatter(file_formatter)
+    logger.addHandler(file_handler)
+    logger.addHandler(stream_handler)
+    return logger
 
 
 def log_best_params(result, logger):

@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import torch
+import os
 
 
 def sample_synthetic(n_env, n_samples, n_features=10, invariance='T', post_treatment_type='collider',
@@ -68,14 +69,16 @@ def sample_semisynthetic(n_env, n_features, invariance='T', post_treatment_type=
     data = []
 
     # Load dataset
-    x = pd.read_csv("datasets/ihdp_obs.csv", delim_whitespace=True)
+    current_dir = os.path.dirname(__file__)
+    file_path = os.path.join(current_dir, "datasets", "ihdp_obs.csv")
+    x = pd.read_csv(file_path, sep='\s+')
     X_columns = [f'X{i + 1}' for i in range(n_features)]
     X_data = x[X_columns].values
     n_samples = len(X_data)
 
     # Effect assignment
     effect_assignment = [None] * n_features
-    confounders = np.random.choice(range(n_features), size=4, replace=False)
+    confounders = np.random.choice(range(n_features), size=min(4, n_features), replace=False)
     for i in confounders:
         effect_assignment[i] = 'both'
     remaining_indices = [i for i in range(n_features) if i not in confounders]
