@@ -45,7 +45,7 @@ class NeuralNet(nn.Module):
         return logits
 
 
-class InstantRamen:
+class InstaRamen:
     def __init__(
         self,
         input_dim,
@@ -60,7 +60,7 @@ class InstantRamen:
         use_xgboost=False,
         logger=None,
     ):
-        super(InstantRamen, self).__init__()
+        super(InstaRamen, self).__init__()
         self.input_dim = input_dim
         self.n_env = n_env
         self.init_temp = init_temp

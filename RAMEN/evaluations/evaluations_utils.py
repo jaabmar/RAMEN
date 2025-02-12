@@ -8,7 +8,7 @@ import torch
 from sklearn.linear_model import LinearRegression, LogisticRegression
 from xgboost import XGBClassifier, XGBRegressor
 
-from RAMEN.models.instant_ramen import InstantRamen
+from RAMEN.models.insta_ramen import InstaRamen
 from RAMEN.models.IRM import IRM
 
 # Constants
@@ -46,10 +46,12 @@ def setup_logger(log_name, post_treatment, invariance, seed):
     file_handler = logging.FileHandler(log_filename, delay=False)
     file_formatter = logging.Formatter('%(asctime)s - %(message)s')
     file_handler.setFormatter(file_formatter)
+
     class FlushStreamHandler(logging.StreamHandler):
         def emit(self, record):
             super().emit(record)
             self.flush()
+
     stream_handler = FlushStreamHandler(sys.stdout)
     stream_handler.setFormatter(file_formatter)
     logger.addHandler(file_handler)
@@ -66,13 +68,13 @@ def pool_data(data, dim):
     return np.asarray([env[dim] for env in data])
 
 
-def tune_instant_ramen(X, Y, T, n_features, n_env, use_xgboost, logger):
+def tune_insta_ramen(X, Y, T, n_features, n_env, use_xgboost, logger):
     results = []
 
     for lr, init_temp, anneal_rate in PARAM_COMBINATIONS:
         logger.info("Testing with lr=%s, init_temp=%s, anneal_rate=%s", lr, init_temp, anneal_rate)
 
-        instant_ramen = InstantRamen(
+        insta_ramen = InstaRamen(
             input_dim=n_features,
             n_env=n_env,
             init_temp=init_temp,
@@ -82,7 +84,7 @@ def tune_instant_ramen(X, Y, T, n_features, n_env, use_xgboost, logger):
             logger=logger,
         )
 
-        subset, loss = instant_ramen.compute_subset(X, Y, T)
+        subset, loss = insta_ramen.compute_subset(X, Y, T)
 
         results.append({
             'learning_rate': lr,

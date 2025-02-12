@@ -4,7 +4,7 @@ from RAMEN.data.data import sample_synthetic
 from RAMEN.evaluations.evaluations_utils import (evaluate_irm,
                                                  evaluate_naive_baselines,
                                                  evaluate_subset, pool_data,
-                                                 tune_instant_ramen, setup_logger)
+                                                 tune_insta_ramen, setup_logger)
 from RAMEN.models.ramen import Ramen
 
 
@@ -45,18 +45,18 @@ def main():
     error_ramen = evaluate_subset(subset_ramen, data, use_xgboost=False)
     logger.info("Ramen Subset: [%s], MAE: %.3f", ', '.join(map(str, subset_ramen)), error_ramen)
 
-    logger.info("Tuning Instant Ramen model...")
-    subset_instant_ramen = tune_instant_ramen(X, Y, T, obs_features, args.n_env, use_xgboost=False, logger=logger)
-    error_instant_ramen = evaluate_subset(subset_instant_ramen, data, use_xgboost=False)
-    logger.info("Instant Ramen Subset: [%s], MAE: %.3f", ', '.join(map(str, subset_instant_ramen)), error_instant_ramen)
+    logger.info("Tuning Insta-Ramen model...")
+    subset_insta_ramen = tune_insta_ramen(X, Y, T, obs_features, args.n_env, use_xgboost=False, logger=logger)
+    error_insta_ramen = evaluate_subset(subset_insta_ramen, data, use_xgboost=False)
+    logger.info("Insta-Ramen Subset: [%s], MAE: %.3f", ', '.join(map(str, subset_insta_ramen)), error_insta_ramen)
 
     logger.info("Evaluating IRM model...")
     error_irm = evaluate_irm(data)
     logger.info("IRM Model - MAE: %.3f", error_irm)
 
     logger.info(
-        "MAE (null): %.3f, MAE (all): %.3f, MAE (Ramen): %.3f, MAE (Instant Ramen): %.3f, MAE (IRM): %.3f",
-        error_null, error_all, error_ramen, error_instant_ramen, error_irm
+        "MAE (null): %.3f, MAE (all): %.3f, MAE (Ramen): %.3f, MAE (Insta-Ramen): %.3f, MAE (IRM): %.3f",
+        error_null, error_all, error_ramen, error_insta_ramen, error_irm
     )
 
 
