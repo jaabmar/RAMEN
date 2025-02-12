@@ -19,14 +19,14 @@
 
 This repository contains the Python implementation of **Robust ATE identification from Multiple ENvironments (RAMEN)**, introduced in the paper *"Doubly Robust Identification of Treatment Effects from Multiple Environments"*.
 
-RAMEN addresses treatment effect identification by leveraging the heterogeneity of multiple data sources without requiring complete knowledge of the causal graph. It achieves *doubly robust identification*, meaning the treatment effect can be identified if either the causal parents of the treatment or those of the outcome are observed.
+RAMEN addresses treatment effect identification by leveraging the heterogeneity of multiple data sources without requiring complete knowledge of the causal graph. In this context, identification refers to the discovery of a *valid adjustment set*—a set of covariates that can be used to correctly identify the treatment effect, enabling unbiased estimation in subsequent steps. In particular, RAMEN achieves doubly robust identification, meaning the treatment effect can be identified if either the causal parents of the treatment or those of the outcome are observed.
 
 ### **Key Contributions:**
 
 - **Doubly Robust Identification:** We introduce a novel double robustness property targeting identification rather than estimation, providing guarantees even with post-treatment and unobserved variables.
 
 - **Algorithms:**
-  1. **RAMEN:** Uses a combinatorial search over subsets of covariates.
+  1. **RAMEN:** Uses a combinatorial search over subsets of covariates to find valid adjustment sets.
   2. **Insta-RAMEN:** A scalable optimization procedure leveraging the Gumbel trick.
 
 - **Empirical Validation:** Our algorithms outperform existing methods on synthetic and semi-synthetic datasets and show strong results on real-world data, aligning with epidemiological findings.
@@ -50,7 +50,7 @@ RAMEN/
 │   ├── evaluations_utils.py           # Evaluation helper functions
 │
 │── models/                            # Model implementations
-│   ├── instant_ramen.py               # Instant RAMEN model
+│   ├── insta_ramen.py               # Insta-RAMEN model
 │   ├── IRM.py                         # Invariant Risk Minimization (IRM) model
 │   ├── ramen.py                       # RAMEN model
 │   ├── models_utils.py                # Model utility functions
