@@ -50,7 +50,7 @@ RAMEN/
 │   ├── evaluations_utils.py           # Evaluation helper functions
 │
 │── models/                            # Model implementations
-│   ├── insta_ramen.py               # Insta-RAMEN model
+│   ├── insta_ramen.py                 # Insta-RAMEN model
 │   ├── IRM.py                         # Invariant Risk Minimization (IRM) model
 │   ├── ramen.py                       # RAMEN model
 │   ├── models_utils.py                # Model utility functions
